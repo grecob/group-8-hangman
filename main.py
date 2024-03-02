@@ -22,9 +22,13 @@ def main():
         # letter guessed
         if len(user_guess.strip()) == 1:
             game_state.guess_letter(user_guess)
+            if(game_state.check_win() or game_state.check_lose()):
+                break
         # word guessed
         else:
             game_state.guess_word(user_guess)
+            if(game_state.check_win() or game_state.check_lose()):
+                break
         
 
 main()

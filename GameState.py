@@ -18,6 +18,9 @@ class GameState:
         self.incorrect_guesses = set()
         self.incorrect_word_guesses = set()
 
+        # sets the number of incorrect guesses allowed, put 6 by default for each of the limbs of mr.stickman
+        self.allowed_number_of_incorrect = 6
+
     # return how many times a correct guess has happened
     def get_number_of_correct_guesses(self):
         return len(self.correct_guesses)
@@ -68,7 +71,7 @@ class GameState:
         # word matches, send win sequence - TODO
         if( word.lower() == self.secret_word):
             print("entire word matches.")
-
+            self.current_word = word.lower()
             return True
         
         # word does not match, draw a part of the hangman - TODO
@@ -90,4 +93,19 @@ class GameState:
                 current_word_list[i] = self.secret_word[i]
         # rejoin the list, updating the word 
         self.current_word = ''.join(current_word_list)
+
+    # returns true if the currently guessed word matches the secret word
+    def check_win(self):
+        if(self.current_word == self.secret_word):
+            print("You Win!")
+            return True
+        else:
+            return False
     
+    # returns true if the total number of guesses reaches the number allowed, hangman is fully drawn
+    def check_lose(self):
+        if(self.allowed_number_of_incorrect == self.get_number_of_incorrect_guesses() + self.get_number_of_incorrect_word_guesses()):
+            print("You Lose!")
+            return True
+        else: 
+            return False
