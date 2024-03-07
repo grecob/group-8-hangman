@@ -3,8 +3,8 @@ Project Description: The project allows users to play the well-known game hangma
 
 Team members: Bryson Greco, Dylan Stephens, Shelby Kendrick, Alexandra Cabrera, Vaughn-Eric De La Garza
 
-How to install:
+How to install: Just pull from github
 
-How to run:
+How to run: Double-click main to start the GUI
 
-How to play: 
+How to play: In the text prompt, Enter a guess(whole word or single letter), it will tell you whether you were correct. Just keep guessing until you win or lose.
