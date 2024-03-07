@@ -53,7 +53,6 @@ class GameState:
         if(letter.lower() not in self.correct_guesses and letter.lower() not in self.incorrect_guesses):
             # correct guess
             if( letter.lower() in self.secret_word):
-                # print("correct letter guessed.")
                 # update the correct_guesses set
                 self.correct_guesses.add(letter.lower())
                 self.update_current_word(letter.lower())
@@ -65,28 +64,23 @@ class GameState:
                 # update the incorrect_guesses set
                 self.incorrect_guesses.add(letter.lower())
                 self.total_number_of_incorrect_guesses += 1
-                # print("incorrect letter guessed.")
-                # print("number of incorrect guesses: " + str(self.get_number_of_incorrect_guesses() + self.get_number_of_incorrect_word_guesses()))
-                # print(self.current_word)
                 return False
-        else:
-            print("letter already guessed")
     
     
     # guess the whole word
     def guess_word(self, word):
         # word matches, send win sequence - TODO
         if( word.lower() == self.secret_word):
-            print("entire word matches.")
+            # print("entire word matches.")
             self.current_word = word.lower()
             return True
         
         # word does not match, draw a part of the hangman - TODO
         else:
-            print("entire word does not match.")
+            # print("entire word does not match.")
             self.incorrect_word_guesses.add(word.lower())
             self.total_number_of_incorrect_guesses += 1
-            print('num of incorrect guesses: ' + str(self.get_number_of_incorrect_guesses() + self.get_number_of_incorrect_word_guesses()))
+            # print('num of incorrect guesses: ' + str(self.get_number_of_incorrect_guesses() + self.get_number_of_incorrect_word_guesses()))
             return False
 
     def get_current_word(self):
@@ -105,7 +99,6 @@ class GameState:
     # returns true if the currently guessed word matches the secret word
     def check_win(self):
         if(self.current_word == self.secret_word):
-            print("You Win!")
             return True
         else:
             return False
@@ -114,7 +107,6 @@ class GameState:
     def check_lose(self):
         # if(self.allowed_number_of_incorrect == self.get_number_of_incorrect_guesses() + self.get_number_of_incorrect_word_guesses()):
         if(self.allowed_number_of_incorrect == self.total_number_of_incorrect_guesses):
-            print("You Lose!")
             return True
         else: 
             return False
