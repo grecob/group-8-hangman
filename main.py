@@ -1,34 +1,24 @@
 # imports
 from Dictionary import Dictionary
 from GameState import GameState
+from HangmanGame import HangmanGame
+import tkinter as tk
 
 # main entry point function
 def main():
-    print("please choose a category")
-    print("1. Dictionary")
-    choice = input()
+    # print("please choose a category")
+    # print("1. Dictionary")
+    # choice = input()
     dictionary = Dictionary()
-    dictionary.choose_category(int(choice))
+    # dictionary.choose_category(int(choice))
+    dictionary.choose_category(1)
     dictionary.read_csv()
 
     # create game state object and pass in instance of the chosen word
     game_state = GameState(dictionary.get_chosen_word_instance())
 
-    # game loop
-    while(True):
-        # TODO debug
-        print("current word: " + game_state.current_word)
-        user_guess = input("Enter your guess (letter or whole word)").lower()
-        # letter guessed
-        if len(user_guess.strip()) == 1:
-            game_state.guess_letter(user_guess)
-            if(game_state.check_win() or game_state.check_lose()):
-                break
-        # word guessed
-        else:
-            game_state.guess_word(user_guess)
-            if(game_state.check_win() or game_state.check_lose()):
-                break
-        
+    root = tk.Tk()
+    app = HangmanGame(root, game_state)
+    root.mainloop()        
 
 main()
