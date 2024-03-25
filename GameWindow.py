@@ -36,8 +36,3 @@ class GameWindow:
         game_state = GameState(dictionary.get_chosen_word_instance())
         new_frame = HangmanGame(self.root, game_state)
         new_frame.pack(fill=tk.BOTH, expand=True)
-
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = GameWindow(root)
-    root.mainloop()
