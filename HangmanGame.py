@@ -1,20 +1,15 @@
 import tkinter as tk
 #class
-class HangmanGame:
-    
+class HangmanGame(tk.Frame):    
 
-    def __init__(self, root, game_state):
-        self.root = root
+    def __init__(self, parent, game_state):
+        super().__init__(parent)
         self.game_state = game_state
         self.incorrect_guesses = []
 
-
-        root.geometry('800x650')
-        root.title("Word Gallows: The Final Guess")
-
         # Create a menubar
-        # self.menubar = tk.Menu(root)
-        # root.configure(menu=self.menubar)
+        # self.menubar = tk.Menu(parent)
+        # parent.configure(menu=self.menubar)
 
 
         # Create menu
@@ -29,21 +24,21 @@ class HangmanGame:
        
 
         # label for page display
-        self.page_label = tk.Label(root, text="Word Gallows: The Final Guess")
+        self.page_label = tk.Label(parent, text="Word Gallows: The Final Guess")
         self.page_label.pack()
         
         #create canvas for hangman
-        self.canvas = tk.Canvas(root, width=600, height=400, bg='white')
+        self.canvas = tk.Canvas(parent, width=600, height=400, bg='white')
         self.canvas.pack()
 
         self.display_var = tk.StringVar()
-        self.display_label = tk.Label(root, textvariable=self.display_var, font=("Helvetica", 16))
+        self.display_label = tk.Label(parent, textvariable=self.display_var, font=("Helvetica", 16))
         self.display_label.pack(pady=(0, 20))
 
-        self.guess_entry = tk.Entry(root)
+        self.guess_entry = tk.Entry(parent)
         self.guess_entry.pack()
 
-        self.guess_button = tk.Button(root, text="Guess", command=self.check_guess)
+        self.guess_button = tk.Button(parent, text="Guess", command=self.check_guess)
         self.guess_button.pack(pady=5)
         
         #draw
@@ -115,7 +110,7 @@ class HangmanGame:
   
 
 if __name__ == "__main__":
-    root = tk.Tk()
-    app = HangmanGame(root)
+    parent = tk.Tk()
+    app = HangmanGame(parent)
     app.update_display()
-    root.mainloop()
+    parent.mainloop()

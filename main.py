@@ -19,6 +19,6 @@ def main():
 
     root = tk.Tk()
     app = HangmanGame(root, game_state)
-    root.mainloop()        
+    root.mainloop()
 
 main()
