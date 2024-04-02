@@ -1,4 +1,6 @@
 import tkinter as tk
+import os
+import GameWindow
 #class
 class HangmanGame(tk.Frame):    
 
@@ -8,17 +10,17 @@ class HangmanGame(tk.Frame):
         self.incorrect_guesses = []
 
         # Create a menubar
-        # self.menubar = tk.Menu(parent)
-        # parent.configure(menu=self.menubar)
-
+        self.menubar = tk.Menu(parent)
+        parent.configure(menu=self.menubar)
 
         # Create menu
-        # view_menu = tk.Menu(self.menubar)
+        view_menu = tk.Menu(self.menubar)
         #Help button is drop down menu
-        # self.menubar.add_cascade(label="Help", menu=view_menu)
+        self.menubar.add_cascade(label="Menu", menu=view_menu)
          # Add menu items
-        # view_menu.add_command(label='Pause')
-        # view_menu.add_command(label='Quit')
+        view_menu.add_command(label='Pause', command = self.pause_popup)
+        view_menu.add_command(label = 'Restart', command = self.return_to_main)
+        view_menu.add_command(label='Quit', command = self.quit)
         # #Settinggs button switches window
         # view_menu.add_command(label="Settings", command=self.switch_to_settings)
        
@@ -105,7 +107,26 @@ class HangmanGame(tk.Frame):
         elif mistakes == 5:
             self.canvas.create_line(150, 200, 130, 230, width=3)  
         elif mistakes == 6:
-            self.canvas.create_line(150, 200, 170, 230, width=3)  
+            self.canvas.create_line(150, 200, 170, 230, width=3)
+
+    def pause_popup(self):
+        pauseWindow = tk.Toplevel()
+        pauseWindow.grab_set()
+        pauseWindow.overrideredirect(True)
+        self_x = self.winfo_rootx()
+        self_y = self.winfo_rooty()
+    # add offset
+        win_x = self_x + 325
+        win_y = self_y - 300
+    # set toplevel in new position
+        pauseWindow.geometry(f'200x150+{win_x}+{win_y}') 
+        pButton = tk.Button(pauseWindow, text = "unpause", command = pauseWindow.destroy).pack(side="top",pady=60)
+        
+
+    def return_to_main(self):
+        self.quit()
+        os.startfile("main.py")
+
 
   
 
