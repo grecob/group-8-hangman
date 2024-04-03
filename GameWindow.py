@@ -1,3 +1,4 @@
+import random
 import tkinter as tk
 from HangmanGame import HangmanGame
 from Dictionary import Dictionary
@@ -7,7 +8,8 @@ class GameWindow:
     def __init__(self, root):
         self.root = root
         root.title("Word Gallows: The Final Guess")
-        root.geometry('800x650')
+        #adjusted size to fit all categories
+        root.geometry('800x750')
 
         # Main Menu
         self.main_menu = tk.Frame(root)
@@ -18,17 +20,44 @@ class GameWindow:
         self.title_label.pack(pady=(100, 100))
 
         # Start Button
-        self.start_btn = tk.Button(self.main_menu, text='Start', command=self.choose_difficulty, font=('Arial', 20), width=20, pady=20)
+        self.start_btn = tk.Button(self.main_menu, text='Start', command=self.choose_category, font=('Arial', 20), width=20, pady=20)
         self.start_btn.pack(pady=10)
 
         # Exit Button
         self.exit_btn = tk.Button(self.main_menu, text='Exit', command=root.quit, font=('Arial', 20), width=20, pady=20)
         self.exit_btn.pack(pady=10)
 
-
-    def choose_difficulty(self):
+    def choose_category(self):
         # hide main frame
         self.main_menu.pack_forget()
+
+        self.choose_category_screen = tk.Frame(self.root)
+        self.choose_category_screen.pack(fill=tk.BOTH, expand=True)
+
+        self.title_label = tk.Label(self.choose_category_screen, text='Choose Category', font=('Arial', 24, 'bold'))
+        self.title_label.pack(pady=(100,50))
+
+        self.easy_btn = tk.Button(self.choose_category_screen, text='fruit',  command=lambda: self.choose_difficulty(1), font=('Arial', 20), width=20, pady=15)
+        self.easy_btn.pack(pady=10)
+
+        self.medium_btn = tk.Button(self.choose_category_screen, text='music',  command=lambda: self.choose_difficulty(2), font=('Arial', 20), width=20, pady=15)
+        self.medium_btn.pack(pady=10)
+
+        self.hard_btn = tk.Button(self.choose_category_screen, text='literature',   command=lambda: self.choose_difficulty(3), font=('Arial', 20), width=20, pady=15)
+        self.hard_btn.pack(pady=10)
+
+        self.easy_btn = tk.Button(self.choose_category_screen, text='animals',  command=lambda: self.choose_difficulty(4), font=('Arial', 20), width=20, pady=15)
+        self.easy_btn.pack(pady=10)
+
+        self.random_number = random.randrange(1,4)
+        self.easy_btn = tk.Button(self.choose_category_screen, text='random',  command=lambda: self.choose_difficulty(self.random_number), font=('Arial', 20), width=20, pady=15)
+        self.easy_btn.pack(pady=10)
+
+
+
+    def choose_difficulty(self, category):
+        # hide category frame
+        self.choose_category_screen.pack_forget()
 
         self.choose_difficulty_screen = tk.Frame(self.root)
         self.choose_difficulty_screen.pack(fill=tk.BOTH, expand=True)
@@ -39,22 +68,22 @@ class GameWindow:
 
         # easy, medium, hard difficulty buttons
         # The lambda: just delays execution until the button is pressed. I'm not sure why it immediately executes without this.
-        self.easy_btn = tk.Button(self.choose_difficulty_screen, text='easy', command=lambda: self.start_game(1), font=('Arial', 20), width=20, pady=20)
+        self.easy_btn = tk.Button(self.choose_difficulty_screen, text='easy', command=lambda: self.start_game(category, 1), font=('Arial', 20), width=20, pady=20)
         self.easy_btn.pack(pady=10)
 
-        self.medium_btn = tk.Button(self.choose_difficulty_screen, text='medium', command=lambda: self.start_game(2), font=('Arial', 20), width=20, pady=20)
+        self.medium_btn = tk.Button(self.choose_difficulty_screen, text='medium', command=lambda: self.start_game(category, 2), font=('Arial', 20), width=20, pady=20)
         self.medium_btn.pack(pady=10)
 
-        self.hard_btn = tk.Button(self.choose_difficulty_screen, text='hard',  command=lambda: self.start_game(3), font=('Arial', 20), width=20, pady=20)
+        self.hard_btn = tk.Button(self.choose_difficulty_screen, text='hard',  command=lambda: self.start_game(category, 3), font=('Arial', 20), width=20, pady=20)
         self.hard_btn.pack(pady=10)
 
-    def start_game(self, difficulty):
+    def start_game(self, category, difficulty):
         # Hide the difficulty selection frame
         self.choose_difficulty_screen.pack_forget()
 
         # Start the game and choose difficulty
         dictionary = Dictionary()
-        dictionary.choose_difficulty(difficulty)
+        dictionary.choose_category_and_difficulty(category, difficulty)
         dictionary.randomization()
 
         game_state = GameState(dictionary.chosen_word)

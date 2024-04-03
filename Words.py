@@ -1,4 +1,21 @@
 class Words:
-    easy = ["Apple", "Ball", "Cat", "Dog", "Egg","Fish", "Goat", "Hat", "Ice", "Jar", "Kite", "Lion", "Moon", "Nest", "Owl", "Pig", "Quiz", "Rat", "Sun", "Tree"]
-    medium = ["Banana", "Elephant", "Guitar", "Helicopter", "Igloo", "Lantern", "Mystery", "Necklace", "Octopus", "Penguin", "Quilt", "Rainbow", "Squirrel", "Telescope", "Umbrella", "Volcano", "Whisper", "Xylophone", "Yacht", "Zebra"]
-    hard = ["Anthropology", "Bureaucracy", "Circumnavigate", "Discombobulate", "Exacerbate", "Flabbergasted", "Gerrymander", "Hippopotamus", "Inconsequential", "Juxtapose", "Kaleidoscopic", "Labyrinthine", "Misanthrope", "Nostalgia", "Onomatopoeia", "Procrastinate", "Quasar", "Rhapsody", "Serendipity", "Tintinnabulation"]
+    fruit = {
+          "easy" : ["Apple", "Banana", "Orange", "Grape", "Cherry", "Peach", "Pear", "Mango", "Kiwi", "Lemon"],
+          "medium" : ["Pineapple", "Watermelon", "Strawberry", "Blueberry", "Raspberry", "Blackberry", "Papaya", "Cantaloupe", "Honeydew", "Pomegranate"],
+          "hard" : ["Persimmon", "Durian", "Mangosteen", "Rambutan", "Lychee", "Jabuticaba", "Ackee", "Kiwano", "Feijoa", "Soursop"]
+    }
+    music = {
+          "easy" : ["Song", "Note", "Beat", "Guitar", "Piano", "Drum", "Sing", "Dance", "Band", "Mic"],
+          "medium" : ["Melody", "Chorus", "Tempo", "Rhythm", "Harmony", "Lyrics", "Bass", "Treble", "Genre", "Acoustic"],
+          "hard" : ["Cacophony", "Crescendo", "Polyphony", "Staccato", "Legato", "Syncopation", "Orchestration", "Improvisation", "Solfège", "Counterpoint"]
+    }
+    literature = {
+          "easy" : ["Book", "Read", "Story", "Page", "Author", "Poem", "Novel", "Plot", "Chapter", "Genre"],
+          "medium" : ["Protagonist", "Antagonist", "Symbolism", "Imagery", "Metaphor", "Allegory", "Irony", "Foreshadowing", "Alliteration", "Sonnet"],
+          "hard" : ["Onomatopoeia", "Bildungsroman", "Synecdoche", "Anachronism", "Euphemism", "Hubris", "Catharsis", "Juxtaposition", "Polysyndeton", "Metonymy"]
+    }
+    animals = {
+          "easy" : ["Dog", "Cat", "Bird", "Fish", "Bear", "Lion", "Tiger", "Elephant", "Monkey", "Rabbit"],
+          "medium" : ["Giraffe", "Zebra", "Kangaroo", "Penguin", "Cheetah", "Dolphin", "Octopus", "Alligator", "Hedgehog", "Koala"],
+          "hard" : ["Platypus", "Armadillo", "Chameleon","Komodo dragon", "Aardvark", "Marmoset", "Ocelot", "Pangolin", "Quokka", "Narwhal"]
+    }
