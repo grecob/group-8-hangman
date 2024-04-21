@@ -1,13 +1,22 @@
 import tkinter as tk
 import os
-import GameWindow
 #class
 class HangmanGame(tk.Frame):    
 
     def __init__(self, parent, game_state):
         super().__init__(parent)
+        self.parent = parent
         self.game_state = game_state
         self.incorrect_guesses = []
+
+        self.canvas_color = 'white'
+        self.parent_color = 'white'
+        self.letter_color = 'black'
+        self.line_color = 'black'
+        self.button_color = 'white'
+        self.drawings = []
+
+        parent.configure(bg=self.parent_color)
 
         # Create a menubar
         self.menubar = tk.Menu(parent)
@@ -19,35 +28,29 @@ class HangmanGame(tk.Frame):
         self.menubar.add_cascade(label="Menu", menu=view_menu)
          # Add menu items
         view_menu.add_command(label='Pause', command = self.pause_popup)
+        view_menu.add_command(label='Colors', command = self.color_change)
         view_menu.add_command(label = 'Restart', command = self.return_to_main)
         view_menu.add_command(label='Quit', command = self.quit)
-        # #Settinggs button switches window
-        # view_menu.add_command(label="Settings", command=self.switch_to_settings)
-       
-
-        # label for page display
-        self.page_label = tk.Label(parent, text="Word Gallows: The Final Guess")
-        self.page_label.pack()
         
         #create canvas for hangman
-        self.canvas = tk.Canvas(parent, width=600, height=400, bg='white')
-        self.canvas.pack()
+        self.canvas = tk.Canvas(parent, width=600, height=400, bg=self.canvas_color)
+        self.canvas.pack(pady=20)
 
         self.display_var = tk.StringVar()
-        self.display_label = tk.Label(parent, textvariable=self.display_var, font=("Helvetica", 16))
+        self.display_label = tk.Label(parent, textvariable=self.display_var, font=("Helvetica", 16), fg=self.letter_color, bg=self.parent_color)
         self.display_label.pack(pady=(0, 20))
 
         self.guess_entry = tk.Entry(parent)
         self.guess_entry.pack()
 
-        self.guess_button = tk.Button(parent, text="Guess", command=self.check_guess)
+        self.guess_button = tk.Button(parent, text="Guess", command=self.check_guess, fg=self.letter_color, bg=self.button_color)
         self.guess_button.pack(pady=5)
         
         #draw
-        self.canvas.create_line(70, 70, 70, 300, width=2) #vertical
-        self.canvas.create_line(70, 70, 150, 70, width=2) #horizontal
-        self.canvas.create_line(150, 70, 150, 100, width=2) #noose
-        self.canvas.create_line(20, 300, 220, 300, width=2) #base
+        self.drawings.append(self.canvas.create_line(250, 70, 250, 300, width=2, fill=self.line_color)) #vertical
+        self.drawings.append(self.canvas.create_line(250, 70, 330, 70, width=2, fill=self.line_color)) #horizontal
+        self.drawings.append(self.canvas.create_line(330, 70, 330, 100, width=2, fill=self.line_color)) #noose
+        self.drawings.append(self.canvas.create_line(200, 300, 400, 300, width=2, fill=self.line_color)) #base
 
         self.update_display()
         
@@ -97,17 +100,17 @@ class HangmanGame(tk.Frame):
         
     def draw_next_part(self, mistakes):
         if mistakes == 1:
-            self.canvas.create_oval(130, 100, 170, 140, width=3)  
+            self.drawings.append(self.canvas.create_oval(310, 100, 350, 140, width=3, outline=self.line_color))  
         elif mistakes == 2:
-            self.canvas.create_line(150, 140, 150, 200, width=3)  
+            self.drawings.append(self.canvas.create_line(330, 140, 330, 200, width=3, fill=self.line_color))  
         elif mistakes == 3:
-            self.canvas.create_line(150, 150, 130, 170, width=3)  
+            self.drawings.append(self.canvas.create_line(330, 150, 310, 170, width=3, fill=self.line_color))  
         elif mistakes == 4:
-            self.canvas.create_line(150, 150, 170, 170, width=3)  
+            self.drawings.append(self.canvas.create_line(330, 150, 350, 170, width=3, fill=self.line_color))  
         elif mistakes == 5:
-            self.canvas.create_line(150, 200, 130, 230, width=3)  
+            self.drawings.append(self.canvas.create_line(330, 200, 310, 230, width=3, fill=self.line_color))  
         elif mistakes == 6:
-            self.canvas.create_line(150, 200, 170, 230, width=3)
+            self.drawings.append(self.canvas.create_line(330, 200, 350, 230, width=3, fill=self.line_color))
 
     def pause_popup(self):
         pauseWindow = tk.Toplevel()
@@ -121,6 +124,80 @@ class HangmanGame(tk.Frame):
     # set toplevel in new position
         pauseWindow.geometry(f'200x150+{win_x}+{win_y}') 
         pButton = tk.Button(pauseWindow, text = "unpause", command = pauseWindow.destroy).pack(side="top",pady=60)
+
+    def color_change(self):
+        # Function to handle button click
+        def on_button_click(color):
+            if color == "Purple":
+                self.canvas_color = 'white'
+                self.parent_color = 'purple'
+                self.letter_color = 'black'
+                self.line_color = 'black'
+                self.button_color = 'white'
+            if color == "White":
+                self.canvas_color = 'white'
+                self.parent_color = 'white'
+                self.letter_color = 'black'
+                self.line_color = 'black'
+                self.button_color = 'white'
+            if color == "Black":
+                self.canvas_color = 'white'
+                self.parent_color = 'black'
+                self.letter_color = 'white'
+                self.line_color = 'black'
+                self.button_color = 'white'
+            if color == "Dark Grey":
+                self.canvas_color = 'Black'
+                self.parent_color = 'dark grey'
+                self.letter_color = 'white'
+                self.line_color = 'white'
+                self.button_color = 'black'
+            if color == "Red":
+                self.canvas_color = 'white'
+                self.parent_color = 'red'
+                self.letter_color = 'black'
+                self.line_color = 'black'
+                self.button_color = 'white'
+            if color == "Blue":
+                self.canvas_color = 'white'
+                self.parent_color = 'blue'
+                self.letter_color = 'black'
+                self.line_color = 'black'
+                self.button_color = 'white'
+
+            update_colors()
+            popup.destroy()
+
+        def update_colors():
+            self.canvas.configure(bg=self.canvas_color)
+            self.parent.configure(bg=self.parent_color)
+            self.display_label.configure(fg=self.letter_color, bg=self.parent_color)
+            self.guess_button.configure(fg=self.letter_color, bg=self.button_color)
+            # Change the color of each item
+            for i, item in enumerate(self.drawings):
+                if i == 4:
+                    self.canvas.itemconfig(item, outline=self.line_color)
+                else:
+                    self.canvas.itemconfig(item, fill=self.line_color)
+
+
+        # Create popup window
+        popup = tk.Toplevel()
+        popup.title("Choose a Color")
+        
+        self_x = self.winfo_rootx()
+        self_y = self.winfo_rooty()
+        win_x = self_x + 325
+        win_y = self_y - 300
+
+        # popup.geometry(f'200x150+{win_x}+{win_y}')  # Set a fixed size for the popup
+        
+        # Define colors and create buttons
+        colors = ["White", "Black", "Dark Grey", "Red", "Purple", "Blue"]
+        for color in colors:
+            button = tk.Button(popup, text=color, bg=color, 
+                            command=lambda c=color: on_button_click(c))
+            button.pack(fill='x', padx=10, pady=5)
         
 
     def return_to_main(self):

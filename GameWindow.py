@@ -35,23 +35,29 @@ class GameWindow:
         self.choose_category_screen.pack(fill=tk.BOTH, expand=True)
 
         self.title_label = tk.Label(self.choose_category_screen, text='Choose Category', font=('Arial', 24, 'bold'))
-        self.title_label.pack(pady=(100,50))
+        # self.title_label.pack(pady=(100,50))
+        self.title_label.grid(row=0, column=0, columnspan=2, pady=(100,50), padx=(60,30))
 
         self.easy_btn = tk.Button(self.choose_category_screen, text='fruit',  command=lambda: self.choose_difficulty(1), font=('Arial', 20), width=20, pady=15)
-        self.easy_btn.pack(pady=10)
+        # self.easy_btn.pack(pady=10)
+        self.easy_btn.grid(row=1,column=0, padx=(60,10), pady=(10,10))
 
         self.medium_btn = tk.Button(self.choose_category_screen, text='music',  command=lambda: self.choose_difficulty(2), font=('Arial', 20), width=20, pady=15)
-        self.medium_btn.pack(pady=10)
+        # self.medium_btn.pack(pady=10)
+        self.medium_btn.grid(row=1,column=1, padx=(10,10), pady=(10,10))
 
         self.hard_btn = tk.Button(self.choose_category_screen, text='literature',   command=lambda: self.choose_difficulty(3), font=('Arial', 20), width=20, pady=15)
-        self.hard_btn.pack(pady=10)
+        # self.hard_btn.pack(pady=10)
+        self.hard_btn.grid(row=2,column=0, padx=(60,10), pady=(10,10))
 
         self.easy_btn = tk.Button(self.choose_category_screen, text='animals',  command=lambda: self.choose_difficulty(4), font=('Arial', 20), width=20, pady=15)
-        self.easy_btn.pack(pady=10)
+        # self.easy_btn.pack(pady=10)
+        self.easy_btn.grid(row=2,column=1, padx=(10,10), pady=(10,10))
 
         self.random_number = random.randrange(1,4)
         self.easy_btn = tk.Button(self.choose_category_screen, text='random',  command=lambda: self.choose_difficulty(self.random_number), font=('Arial', 20), width=20, pady=15)
-        self.easy_btn.pack(pady=10)
+        # self.easy_btn.pack(pady=10)
+        self.easy_btn.grid(row=3,column=0,columnspan=2, padx=(60,10), pady=(10,10))
 
 
 
@@ -89,3 +95,4 @@ class GameWindow:
         game_state = GameState(dictionary.chosen_word)
         new_frame = HangmanGame(self.root, game_state)
         new_frame.pack(fill=tk.BOTH, expand=True)
+        self.root.geometry('')
