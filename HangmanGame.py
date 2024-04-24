@@ -1,4 +1,5 @@
 import tkinter as tk
+import pygame
 import os
 #class
 class HangmanGame(tk.Frame):    
@@ -8,6 +9,9 @@ class HangmanGame(tk.Frame):
         self.parent = parent
         self.game_state = game_state
         self.incorrect_guesses = []
+        self.play_sound()
+
+
 
         self.canvas_color = 'white'
         self.parent_color = 'white'
@@ -17,6 +21,8 @@ class HangmanGame(tk.Frame):
         self.drawings = []
 
         parent.configure(bg=self.parent_color)
+
+        
 
         # Create a menubar
         self.menubar = tk.Menu(parent)
@@ -45,7 +51,10 @@ class HangmanGame(tk.Frame):
 
         self.guess_button = tk.Button(parent, text="Guess", command=self.check_guess, fg=self.letter_color, bg=self.button_color)
         self.guess_button.pack(pady=5)
-        
+
+        self.toggle_button = tk.Button(parent, text="Sound On/Off", command=self.toggle_sound)
+        self.toggle_button.pack()
+
         #draw
         self.drawings.append(self.canvas.create_line(250, 70, 250, 300, width=2, fill=self.line_color)) #vertical
         self.drawings.append(self.canvas.create_line(250, 70, 330, 70, width=2, fill=self.line_color)) #horizontal
@@ -70,6 +79,18 @@ class HangmanGame(tk.Frame):
             display_message += f"\n{message}"
 
         self.display_var.set(display_message)
+
+   #sound button
+    def play_sound(self):
+        pygame.mixer.init()
+        pygame.mixer.music.load("442911__scicodedev__calm_happy_rpgtownbackground.mp3") 
+        pygame.mixer.music.play()
+
+    def toggle_sound(self):
+        if pygame.mixer.music.get_busy():
+            pygame.mixer.music.pause()
+        else:
+            pygame.mixer.music.unpause()
 
     def check_guess(self):
         guess = self.guess_entry.get().lower()
@@ -168,6 +189,8 @@ class HangmanGame(tk.Frame):
             update_colors()
             popup.destroy()
 
+        
+
         def update_colors():
             self.canvas.configure(bg=self.canvas_color)
             self.parent.configure(bg=self.parent_color)
@@ -199,6 +222,8 @@ class HangmanGame(tk.Frame):
                             command=lambda c=color: on_button_click(c))
             button.pack(fill='x', padx=10, pady=5)
         
+
+       
 
     def return_to_main(self):
         self.quit()

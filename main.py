@@ -1,5 +1,6 @@
 # imports
 from GameWindow import GameWindow
+
 import tkinter as tk
 
 # main entry point function
