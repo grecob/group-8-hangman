@@ -8,3 +8,11 @@ How to install: Just pull from github
 How to run: Double-click main to start the GUI
 
 How to play: In the text prompt, Enter a guess(whole word or single letter), it will tell you whether you were correct. Just keep guessing until you win or lose.
+
+Possible extra installs: tkinter, pygame
+
+How to install extras:
+1.Go to command prompt
+2. pip install pygame
+3. pip install tkinter
+
