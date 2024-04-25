@@ -1,5 +1,8 @@
 import random
 import tkinter as tk
+
+import pygame
+from tkinter import PhotoImage
 from HangmanGame import HangmanGame
 from Dictionary import Dictionary
 from GameState import GameState
@@ -10,10 +13,14 @@ class GameWindow:
         root.title("Word Gallows: The Final Guess")
         #adjusted size to fit all categories
         root.geometry('800x750')
+        self.play_sound()
+        pygame.init()
+      
 
         # Main Menu
         self.main_menu = tk.Frame(root)
         self.main_menu.pack(fill=tk.BOTH, expand=True)
+
 
         # Title Label
         self.title_label = tk.Label(self.main_menu, text='Word Gallows: The Final Guess', font=('Arial', 24, 'bold'))
@@ -26,6 +33,18 @@ class GameWindow:
         # Exit Button
         self.exit_btn = tk.Button(self.main_menu, text='Exit', command=root.quit, font=('Arial', 20), width=20, pady=20)
         self.exit_btn.pack(pady=10)
+
+        
+    def play_sound(self):
+        pygame.mixer.init()
+        pygame.mixer.music.load("442911__scicodedev__calm_happy_rpgtownbackground.mp3") 
+        pygame.mixer.music.play()
+
+    def pause_sound(self):
+        pygame.mixer.music.pause()
+
+    def unpause_sound(self):
+        pygame.mixer.music.unpause()
 
     def choose_category(self):
         # hide main frame
