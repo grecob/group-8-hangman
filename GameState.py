@@ -46,6 +46,9 @@ class GameState:
     def get_total_number_of_incorrect_guesses(self):
         return self.total_number_of_incorrect_guesses
     
+    def add_incorrect_guess(self):
+        self.total_number_of_incorrect_guesses += 1
+    
     
     # guess a single letter
     def guess_letter(self, letter):
@@ -56,7 +59,6 @@ class GameState:
                 # update the correct_guesses set
                 self.correct_guesses.add(letter.lower())
                 self.update_current_word(letter.lower())
-
                 return True
             
             # incorrect guess
@@ -82,9 +84,26 @@ class GameState:
             self.total_number_of_incorrect_guesses += 1
             # print('num of incorrect guesses: ' + str(self.get_number_of_incorrect_guesses() + self.get_number_of_incorrect_word_guesses()))
             return False
+    
+    #Provide the hint    
+    def get_hint_letter(self):
+        hint_letter = ""
+        while True:
+            hint_letter = random.choice(self.secret_word)
+            if hint_letter not in  self.correct_guesses:
+                break
+        self.correct_guesses.add(hint_letter)
+        self.update_current_word(hint_letter)
 
     def get_current_word(self):
         return self.current_word
+    
+    def get_secret_word(self):
+        return self.secret_word
+    
+    def get_number_of_unique_letters(self):
+        unique_letters = set(self.secret_word)
+        return len(unique_letters)
     
     def update_current_word(self, letter):
         # create a list of chars from the current word

@@ -37,10 +37,17 @@ class HangmanGame(tk.Frame):
         view_menu.add_command(label='Colors', command = self.color_change)
         view_menu.add_command(label = 'Restart', command = self.return_to_main)
         view_menu.add_command(label='Quit', command = self.quit)
-        
+
         #create canvas for hangman
         self.canvas = tk.Canvas(parent, width=600, height=400, bg=self.canvas_color)
         self.canvas.pack(pady=20)
+        
+        #Create hint button
+        self.dragon_helper = tk.PhotoImage(file="dragon_helper.png")
+        self.hint_button = tk.Button(parent, text="Need a hint?", image=self.dragon_helper, compound="bottom", command=self.get_hint)
+        self.hint_button.config(width=70, height = 80)
+        self.hint_button.pack(side=tk.RIGHT, padx=(0,40))
+
 
         self.display_var = tk.StringVar()
         self.display_label = tk.Label(parent, textvariable=self.display_var, font=("Helvetica", 16), fg=self.letter_color, bg=self.parent_color)
@@ -115,6 +122,16 @@ class HangmanGame(tk.Frame):
             self.guess_button.config(state='disabled')
 
         self.update_display(end_game_message)
+
+    def get_hint(self):
+        if ((self.game_state.get_total_number_of_incorrect_guesses() < 5) and ((self.game_state.get_number_of_correct_guesses() + 1) < self.game_state.get_number_of_unique_letters())):
+            self.game_state.add_incorrect_guess()
+            self.draw_next_part(self.game_state.get_total_number_of_incorrect_guesses())
+            self.game_state.get_hint_letter()
+            self.update_display()
+            if ((self.game_state.get_total_number_of_incorrect_guesses() >= 5) or ((self.game_state.get_number_of_correct_guesses() + 1) >= self.game_state.get_number_of_unique_letters())):
+                self.hint_button.config(text="Sorry!")
+                self.hint_button.config(state='disabled')
     
     def switch_to_settings(self):
         self.page_label.config(text="Settings Page")
