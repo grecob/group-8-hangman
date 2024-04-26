@@ -12,7 +12,6 @@ class HangmanGame(tk.Frame):
         self.play_sound()
 
 
-
         self.canvas_color = 'white'
         self.parent_color = 'white'
         self.letter_color = 'black'
@@ -21,8 +20,6 @@ class HangmanGame(tk.Frame):
         self.drawings = []
 
         parent.configure(bg=self.parent_color)
-
-        
 
         # Create a menubar
         self.menubar = tk.Menu(parent)
@@ -42,6 +39,11 @@ class HangmanGame(tk.Frame):
         self.canvas = tk.Canvas(parent, width=600, height=400, bg=self.canvas_color)
         self.canvas.pack(pady=20)
         
+        #add background image
+        self.background_image = tk.PhotoImage(file="bg_img.png")
+        self.canvas.create_image(0, 0, anchor=tk.NW, image=self.background_image)
+
+
         #Create hint button
         self.dragon_helper = tk.PhotoImage(file="dragon_helper.png")
         self.hint_button = tk.Button(parent, text="Need a hint?", image=self.dragon_helper, compound="bottom", command=self.get_hint)
@@ -59,8 +61,11 @@ class HangmanGame(tk.Frame):
         self.guess_button = tk.Button(parent, text="Guess", command=self.check_guess, fg=self.letter_color, bg=self.button_color)
         self.guess_button.pack(pady=5)
 
-        self.toggle_button = tk.Button(parent, text="Sound On/Off", command=self.toggle_sound)
-        self.toggle_button.pack()
+
+         #Create sound button
+        self.sound_icon = tk.PhotoImage(file="sound_on.png") 
+        self.toggle_button = tk.Button(parent, image=self.sound_icon, command=self.toggle_sound, bg=self.parent_color, bd=0)
+        self.toggle_button.pack(side=tk.LEFT, padx=(0, 40))
 
         #draw
         self.drawings.append(self.canvas.create_line(250, 70, 250, 300, width=2, fill=self.line_color)) #vertical
@@ -138,17 +143,18 @@ class HangmanGame(tk.Frame):
         
     def draw_next_part(self, mistakes):
         if mistakes == 1:
-            self.drawings.append(self.canvas.create_oval(310, 100, 350, 140, width=3, outline=self.line_color))  
+            self.drawings.append(self.canvas.create_oval(310, 90, 360, 150, width=4, outline=self.line_color))  
         elif mistakes == 2:
-            self.drawings.append(self.canvas.create_line(330, 140, 330, 200, width=3, fill=self.line_color))  
+            self.drawings.append(self.canvas.create_line(330, 140, 330, 220, width=4, fill=self.line_color))  
         elif mistakes == 3:
-            self.drawings.append(self.canvas.create_line(330, 150, 310, 170, width=3, fill=self.line_color))  
+            self.drawings.append(self.canvas.create_line(330, 150, 300, 180, width=4, fill=self.line_color))  
         elif mistakes == 4:
-            self.drawings.append(self.canvas.create_line(330, 150, 350, 170, width=3, fill=self.line_color))  
+            self.drawings.append(self.canvas.create_line(330, 150, 360, 180, width=4, fill=self.line_color))  
         elif mistakes == 5:
-            self.drawings.append(self.canvas.create_line(330, 200, 310, 230, width=3, fill=self.line_color))  
+            self.drawings.append(self.canvas.create_line(330, 220, 300, 260, width=4, fill=self.line_color))  
         elif mistakes == 6:
-            self.drawings.append(self.canvas.create_line(330, 200, 350, 230, width=3, fill=self.line_color))
+            self.drawings.append(self.canvas.create_line(330, 220, 360, 260, width=4, fill=self.line_color))
+
 
     def pause_popup(self):
         pauseWindow = tk.Toplevel()
