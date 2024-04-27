@@ -25,6 +25,7 @@ class GameWindow:
         self.root = root
         root.title("Word Gallows: The Final Guess")
         root.geometry('800x750')
+        root.resizable(False, False)
         self.play_sound()
         self.current_background_label = None
         pygame.init()
