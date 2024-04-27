@@ -143,18 +143,17 @@ class HangmanGame(tk.Frame):
         
     def draw_next_part(self, mistakes):
         if mistakes == 1:
-            self.drawings.append(self.canvas.create_oval(310, 90, 360, 150, width=4, outline=self.line_color))  
+            self.drawings.append(self.canvas.create_oval(310, 100, 350, 140, width=3, outline=self.line_color))  
         elif mistakes == 2:
-            self.drawings.append(self.canvas.create_line(330, 140, 330, 220, width=4, fill=self.line_color))  
+            self.drawings.append(self.canvas.create_line(330, 140, 330, 200, width=3, fill=self.line_color))  
         elif mistakes == 3:
-            self.drawings.append(self.canvas.create_line(330, 150, 300, 180, width=4, fill=self.line_color))  
+            self.drawings.append(self.canvas.create_line(330, 150, 310, 170, width=3, fill=self.line_color))  
         elif mistakes == 4:
-            self.drawings.append(self.canvas.create_line(330, 150, 360, 180, width=4, fill=self.line_color))  
+            self.drawings.append(self.canvas.create_line(330, 150, 350, 170, width=3, fill=self.line_color))  
         elif mistakes == 5:
-            self.drawings.append(self.canvas.create_line(330, 220, 300, 260, width=4, fill=self.line_color))  
+            self.drawings.append(self.canvas.create_line(330, 200, 310, 230, width=3, fill=self.line_color))  
         elif mistakes == 6:
-            self.drawings.append(self.canvas.create_line(330, 220, 360, 260, width=4, fill=self.line_color))
-
+            self.drawings.append(self.canvas.create_line(330, 200, 350, 230, width=3, fill=self.line_color))
 
     def pause_popup(self):
         pauseWindow = tk.Toplevel()
