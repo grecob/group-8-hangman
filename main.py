@@ -7,6 +7,7 @@ import tkinter as tk
 def main():
     root = tk.Tk()
     app = GameWindow(root)
+    root.resizable(False,False)
     root.mainloop()
 
 main()

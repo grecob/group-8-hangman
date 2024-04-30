@@ -12,7 +12,6 @@ class HangmanGame(tk.Frame):
         self.play_sound()
 
 
-
         self.canvas_color = 'white'
         self.parent_color = 'white'
         self.letter_color = 'black'
@@ -21,8 +20,6 @@ class HangmanGame(tk.Frame):
         self.drawings = []
 
         parent.configure(bg=self.parent_color)
-
-        
 
         # Create a menubar
         self.menubar = tk.Menu(parent)
@@ -42,6 +39,11 @@ class HangmanGame(tk.Frame):
         self.canvas = tk.Canvas(parent, width=600, height=400, bg=self.canvas_color)
         self.canvas.pack(pady=20)
         
+        #add background image
+        self.background_image = tk.PhotoImage(file="bg_img.png")
+        self.canvas.create_image(0, 0, anchor=tk.NW, image=self.background_image)
+
+
         #Create hint button
         self.dragon_helper = tk.PhotoImage(file="dragon_helper.png")
         self.hint_button = tk.Button(parent, text="Need a hint?", image=self.dragon_helper, compound="bottom", command=self.get_hint)
@@ -59,8 +61,11 @@ class HangmanGame(tk.Frame):
         self.guess_button = tk.Button(parent, text="Guess", command=self.check_guess, fg=self.letter_color, bg=self.button_color)
         self.guess_button.pack(pady=5)
 
-        self.toggle_button = tk.Button(parent, text="Sound On/Off", command=self.toggle_sound)
-        self.toggle_button.pack()
+
+         #Create sound button
+        self.sound_icon = tk.PhotoImage(file="sound_on.png") 
+        self.toggle_button = tk.Button(parent, image=self.sound_icon, command=self.toggle_sound, bg=self.parent_color, bd=0)
+        self.toggle_button.pack(side=tk.LEFT, padx=(0, 40))
 
         #draw
         self.drawings.append(self.canvas.create_line(250, 70, 250, 300, width=2, fill=self.line_color)) #vertical
